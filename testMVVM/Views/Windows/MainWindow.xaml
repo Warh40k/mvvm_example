@@ -5,22 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:testMVVM"
         xmlns:vm="clr-namespace:testMVVM.ViewModels"
+        xmlns:cmd="clr-namespace:testMVVM.Infrastructure.Commands"
         mc:Ignorable="d"
-        Title="{Binding Path=Title}" Height="450" Width="800">
+        Title="{Binding Path=Title}" Height="450" Width="800"
+        MinHeight ="300" MinWidth="500"
+        >
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
-                <MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"></MenuItem>
+                <MenuItem Header="Выход">
+                    <MenuItem.Command>
+                        <cmd:CloseApplicationCommand/>
+                    </MenuItem.Command>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Помощь">
                 <MenuItem Header="О программе"></MenuItem>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem MaxHeight="150" MaxWidth="300">
+            <StatusBarItem MaxHeight="150" MaxWidth="200">
                 <TextBlock Text="{Binding Status}"></TextBlock>
             </StatusBarItem>
             <StatusBarItem>
@@ -44,7 +51,7 @@
                             <ColumnDefinition Width="637*"/>
                         </Grid.ColumnDefinitions>
                         <Rectangle Grid.Column="0" Grid.Row="0" Fill="Blue" Stroke="Black" StrokeThickness="3" RadiusX="7" RadiusY ="5"></Rectangle>
-                        <Ellipse></Ellipse>
+                        <Ellipse Grid.Column="1" Grid.Row="0" Fill="Aqua" Stroke="Red" StrokeThickness="5" Width="Auto" Height="Auto"></Ellipse>
                         <GridSplitter Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Width="4"/>
                     </Grid>
                 </TabItem>
