@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testMVVM", "testMVVM\testMV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{F952A1CC-2C58-47EE-9DCF-AE7C5613B9C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "logic_polygon", "logic_polygon\logic_polygon.csproj", "{8B727D60-DE7B-4FD4-9828-8E273C693414}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F952A1CC-2C58-47EE-9DCF-AE7C5613B9C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F952A1CC-2C58-47EE-9DCF-AE7C5613B9C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F952A1CC-2C58-47EE-9DCF-AE7C5613B9C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B727D60-DE7B-4FD4-9828-8E273C693414}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B727D60-DE7B-4FD4-9828-8E273C693414}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B727D60-DE7B-4FD4-9828-8E273C693414}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B727D60-DE7B-4FD4-9828-8E273C693414}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
