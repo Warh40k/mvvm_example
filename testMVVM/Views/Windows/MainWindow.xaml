@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:oxy="http://oxyplot.org/wpf/contrib"
         xmlns:local="clr-namespace:testMVVM"
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
         xmlns:vm="clr-namespace:testMVVM.ViewModels"
@@ -34,6 +35,16 @@
             <MenuItem Header="Помощь">
                 <MenuItem Header="О программе"></MenuItem>
             </MenuItem>
+            <MenuItem Command="{Binding ChangeSelectedIndexCommand}" CommandParameter="-1">
+                <MenuItem.Header>
+                    <fa5:SvgAwesome Height="12" Icon="Regular_ArrowAltCircleLeft"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Command="{Binding ChangeSelectedIndexCommand}" CommandParameter="1">
+                <MenuItem.Header>
+                    <fa5:SvgAwesome Height="12" Icon="Regular_ArrowAltCircleRight"/>
+                </MenuItem.Header>
+            </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem MaxHeight="150" MaxWidth="200">
@@ -42,13 +53,16 @@
             <StatusBarItem>
                 <ProgressBar Width="120" Height="14" Value = "80"></ProgressBar>
             </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="{Binding TabsCount}"></TextBlock>
+            </StatusBarItem>
         </StatusBar>
         <Grid Width="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30*" MinWidth="150" MaxWidth="500"/>
                 <ColumnDefinition Width="70*"/>
             </Grid.ColumnDefinitions>
-            <TabControl Width= "Auto" Grid.Column ="1" HorizontalAlignment="Stretch">
+            <TabControl Width= "Auto" Grid.Column ="1" HorizontalAlignment="Stretch" SelectedIndex="{Binding SelectedPageIndex}" >
                 <TabItem MaxWidth="1000">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
@@ -80,8 +94,18 @@
                         <GridSplitter Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Width="4"/>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Вкладка 2" MaxWidth="1000">
-                    <Grid Background="#FFE5E5E5"/>
+                <TabItem Header="График" MaxWidth="1000">
+                    <Grid>
+                        <oxy:Plot>
+                            <oxy:Plot.Series>
+                                <oxy:LineSeries ItemsSource="{Binding TestDataPoints}" DataFieldX="XValue" DataFieldY="YValue"/>
+                            </oxy:Plot.Series>
+                            <oxy:Plot.Axes>
+                                <oxy:LinearAxis Position="Left" Maximum="1"/>
+                                <oxy:LinearAxis Position="Bottom"/>
+                            </oxy:Plot.Axes>
+                        </oxy:Plot>
+                    </Grid>
                 </TabItem>
             </TabControl>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="4"/>

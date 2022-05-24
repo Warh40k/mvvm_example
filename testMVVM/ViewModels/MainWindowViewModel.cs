@@ -13,6 +13,20 @@ namespace testMVVM.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        #region SelectedPageIndex
+
+        private int _SelectedPageIndex = 0;
+        public int SelectedPageIndex { get => _SelectedPageIndex; set => Set(ref _SelectedPageIndex, value); }
+
+        #endregion
+
+        #region TabsCount
+
+        private int _TabsCount = 0;
+        public int TabsCount { get => _TabsCount; set => Set(ref _TabsCount, value); }
+
+        #endregion
+
         //График: если надо изменять точки, то возвращаем ObservableCollection, иначе перечисление
 
         #region ТестГрафика
@@ -75,6 +89,16 @@ namespace testMVVM.ViewModels
             Application.Current.Shutdown();
         }
 
+        public ICommand ChangeSelectedIndexCommand { get; }
+
+        private bool CanChangeSelectedIndexCommandExecute(object p) => _SelectedPageIndex >= 0;
+
+        public void OnChangeSelectedIndexCommandExecuted(object p)
+        {
+            if (p is null) return;
+            SelectedPageIndex += Convert.ToInt32(p);
+        }
+
         #endregion
 
         #endregion
@@ -84,6 +108,7 @@ namespace testMVVM.ViewModels
             #region Команды
 
             CloseApplicationCommand = new RelatedCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            ChangeSelectedIndexCommand = new RelatedCommand(OnChangeSelectedIndexCommandExecuted, CanChangeSelectedIndexCommandExecute);
 
             #endregion
 
