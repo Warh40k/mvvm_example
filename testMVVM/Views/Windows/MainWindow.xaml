@@ -4,9 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:testMVVM"
+        xmlns:vm="clr-namespace:testMVVM.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{Binding Path=Title}" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <TextBox HorizontalAlignment="Left" Margin="50,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+            Text="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </Window>
