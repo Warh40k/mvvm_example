@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using testMVVM.Infrastructure.Commands;
 using testMVVM.ViewModels.Base;
 
 namespace testMVVM.ViewModels
@@ -32,5 +35,38 @@ namespace testMVVM.ViewModels
         }
 
         #endregion
+
+        #region Status: string - Статус программы
+
+        ///<summary>Статус программы</summary>
+        private string _Status = "Готово";
+
+        public string Status { get => _Status; set => Set(ref _Status, value); }
+
+        #endregion
+
+        #region Команды
+
+        #region CloseApplicationCommand
+        public ICommand CloseApplicationCommand { get; }
+
+        private bool CanCloseApplicationCommandExecute(object p) => true;
+        private void OnCloseApplicationCommandExecuted(object p)
+        {
+            Application.Current.Shutdown();
+        }
+
+        #endregion
+
+        #endregion
+
+        public MainWindowViewModel()
+        {
+            #region Команды
+
+            CloseApplicationCommand = new RelatedCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+
+            #endregion
+        }
     }
 }
