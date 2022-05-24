@@ -13,14 +13,21 @@
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding CloseApplicationCommand}"/>
+    </Window.InputBindings>
+    <Window.Resources>
+        <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
-                <MenuItem Header="Выход">
+                <MenuItem Header="Выход" Command="{StaticResource CloseApplicationCommand}"/>
+                <!--<MenuItem Header="Выход">
                     <MenuItem.Command>
                         <cmd:CloseApplicationCommand/>
                     </MenuItem.Command>
-                </MenuItem>
+                </MenuItem>-->
             </MenuItem>
             <MenuItem Header="Помощь">
                 <MenuItem Header="О программе"></MenuItem>
@@ -40,7 +47,13 @@
                 <ColumnDefinition Width="70*"/>
             </Grid.ColumnDefinitions>
             <TabControl Width= "Auto" Grid.Column ="1">
-                <TabItem Header="Вкладка 1">
+                <TabItem >
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Panel 1"></TextBlock>
+                            <Image Source=""></Image>
+                        </StackPanel>
+                    </TabItem.Header>
                     <Grid Background="#FFE5E5E5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="63*"/>
@@ -51,7 +64,16 @@
                             <ColumnDefinition Width="637*"/>
                         </Grid.ColumnDefinitions>
                         <Rectangle Grid.Column="0" Grid.Row="0" Fill="Blue" Stroke="Black" StrokeThickness="3" RadiusX="7" RadiusY ="5"></Rectangle>
-                        <Ellipse Grid.Column="1" Grid.Row="0" Fill="Aqua" Stroke="Red" StrokeThickness="5" Width="Auto" Height="Auto"></Ellipse>
+                        <Ellipse Grid.Column="1" Grid.Row="0" Fill="Aqua" Stroke="Red" StrokeThickness="5" Width="Auto" Height="Auto">
+                            <Ellipse.InputBindings>
+                                <MouseBinding MouseAction="LeftDoubleClick" Command="{StaticResource CloseApplicationCommand}"/>
+                                <!--<MouseBinding MouseAction="LeftDoubleClick">
+                                    <MouseBinding.Command>
+                                        <cmd:CloseApplicationCommand/>
+                                    </MouseBinding.Command>
+                                </MouseBinding>-->
+                            </Ellipse.InputBindings>
+                        </Ellipse>
                         <GridSplitter Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Width="4"/>
                     </Grid>
                 </TabItem>
