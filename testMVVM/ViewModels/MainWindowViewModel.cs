@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,12 +8,15 @@ using System.Windows;
 using System.Windows.Input;
 using testMVVM.Infrastructure.Commands;
 using testMVVM.Models;
+using testMVVM.Models.Decanat;
 using testMVVM.ViewModels.Base;
 
 namespace testMVVM.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        public ObservableCollection<Group> Groups { get; }
+
         #region SelectedPageIndex
 
         private int _SelectedPageIndex = 0;
@@ -78,7 +82,10 @@ namespace testMVVM.ViewModels
 
         #endregion
 
+        /*********************************************************************************************************************************************/
+
         #region Команды
+
 
         #region CloseApplicationCommand
         public ICommand CloseApplicationCommand { get; }
@@ -103,6 +110,7 @@ namespace testMVVM.ViewModels
 
         #endregion
 
+        /*********************************************************************************************************************************************/
         public MainWindowViewModel()
         {
             #region Команды
@@ -123,6 +131,27 @@ namespace testMVVM.ViewModels
             }
 
             TestDataPoints = data_points;
+
+            int student_index = 0;
+            IEnumerable<Student> students = Enumerable.Range(1, 10).Select(i => new Student
+            {
+                Name = $"Name {student_index}",
+                Surname = $"Surname {student_index}",
+                Patronymic = $"Patronymic {student_index++}",
+                Birthday = DateTime.Now,
+                Rating = 0
+            }); 
+
+            var groups = Enumerable.Range(1, 20).Select(i => new Group()
+            {
+                Name = "Группа" + i.ToString(),
+                Students = new ObservableCollection<Student>(students)
+            });
+
+            Groups = new ObservableCollection<Group>(groups);
+            
+
+
         }
     }
 }
