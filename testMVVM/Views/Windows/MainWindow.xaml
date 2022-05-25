@@ -77,10 +77,10 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <GroupBox Header="Группы">
-                            <ListView ItemsSource="{Binding Groups}" DisplayMemberPath="Name" ></ListView>
+                            <ListView ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" DisplayMemberPath="Name" ></ListView>
                         </GroupBox>
-                        <GroupBox Header="Студенты" Grid.Column="1">
-                            <DataGrid ItemsSource="{Binding Groups}" DisplayMemberPath="Students"></DataGrid>
+                        <GroupBox Header="{Binding SelectedGroup.Name, StringFormat='Студенты группы {0}', FallbackValue='Студенты', TargetNullValue='Группа не выбрана'}" Grid.Column="1" >
+                            <DataGrid ItemsSource="{Binding Groups}"></DataGrid>
                         </GroupBox>
                     </Grid>
                 </TabItem>
