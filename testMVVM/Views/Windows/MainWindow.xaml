@@ -80,8 +80,15 @@
                         <GroupBox Header="Группы">
                             <DockPanel>
                                 <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="0,3">
-                                    <Button Content="Добавить" Margin="0,0,5,0" Command="{Binding CreateGroupCommand}"></Button>
-                                    <Button Content="Удалить" Margin="5,0,0,0" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"></Button>
+                                    <UniformGrid.Resources>
+                                        <Style x:Key="ButtonStyle" TargetType="Button">
+                                            <Setter Property="Margin" Value="3,0"/>
+                                            <Setter Property="Padding" Value="3,5"/>
+                                            <Setter Property="Background" Value="LightGreen"/>
+                                        </Style>
+                                    </UniformGrid.Resources>
+                                    <Button Content="Добавить" Style="{StaticResource ButtonStyle}" Command="{Binding CreateGroupCommand}"></Button>
+                                    <Button Content="Удалить" Style="{StaticResource ButtonStyle}" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"></Button>
                                 </UniformGrid>
                                 <ListView DockPanel.Dock="Top" ItemsSource="{Binding Groups}" SelectedIndex="0" SelectedItem="{Binding SelectedGroup}" >
                                     <ListView.ItemTemplate>
