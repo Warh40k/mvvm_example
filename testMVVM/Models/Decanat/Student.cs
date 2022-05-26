@@ -15,6 +15,7 @@ namespace testMVVM.Models.Decanat
 
         public double Rating { get; set; }
 
+        public string Description { get; set; }
     }
 
     internal class Group
@@ -23,6 +24,7 @@ namespace testMVVM.Models.Decanat
         
         public ICollection<Student> Students { get; set; } // Может быть любой коллекцией
 
+        public string Description { get; set; }
     }
 }
 
