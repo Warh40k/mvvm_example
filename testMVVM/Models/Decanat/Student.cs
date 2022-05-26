@@ -22,7 +22,7 @@ namespace testMVVM.Models.Decanat
     {
         public string Name { get; set; }
         
-        public ICollection<Student> Students { get; set; } // Может быть любой коллекцией
+        public IList<Student> Students { get; set; } // Может быть любой коллекцией
 
         public string Description { get; set; }
     }

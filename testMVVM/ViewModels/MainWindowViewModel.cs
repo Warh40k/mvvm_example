@@ -17,6 +17,14 @@ namespace testMVVM.ViewModels
     {
         public ObservableCollection<Group> Groups { get; }
 
+        public object[] CompositeCollection { get; }
+
+        #region Выбранный непонятный элемент
+
+        private object _SelectedCompositeValue;
+        public object SelectedCompositeValue { get => _SelectedCompositeValue; set => Set(ref _SelectedCompositeValue, value); }
+
+        #endregion
         #region Выбранная группа
         /// <summary>
         /// Выбранная группа в списке
@@ -159,7 +167,15 @@ namespace testMVVM.ViewModels
             });
 
             Groups = new ObservableCollection<Group>(groups);
-            
+
+            var data_list = new List<object>();
+
+            data_list.Add("Hello World");
+            data_list.Add(42);
+            data_list.Add(Groups[1].Students[1]);
+            data_list.Add(Groups[1]);
+
+            CompositeCollection = data_list.ToArray();
 
 
         }
