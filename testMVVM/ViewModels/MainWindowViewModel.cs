@@ -114,6 +114,10 @@ namespace testMVVM.ViewModels
             Application.Current.Shutdown();
         }
 
+        #endregion
+
+        #region ChangeSelectedIndexCommand
+        
         public ICommand ChangeSelectedIndexCommand { get; }
 
         private bool CanChangeSelectedIndexCommandExecute(object p) => _SelectedPageIndex >= 0;
@@ -126,8 +130,43 @@ namespace testMVVM.ViewModels
 
         #endregion
 
+        #region CreateGroupCommand
+
+        public ICommand CreateGroupCommand { get; }
+
+        private bool CanCreateGroupCommandExecute(object p) => true;
+
+        private void OnCreateGroupCommandExecuted(object p)
+        {
+            var group_max_index = Groups.Count + 1;
+            var new_group = new Group
+            {
+                Name = $"Группа {group_max_index}",
+                Students = new ObservableCollection<Student>()
+            };
+
+            Groups.Add(new_group);
+        }
+
         #endregion
 
+        #region DeleteGroupCommand
+
+        public ICommand DeleteGroupCommand { get; }
+
+        private bool CanDeleteGroupCommandExecute(object p) => p is Group group && Groups.Contains(group);
+        private void OnDeleteGroupCommandExecuted(object p)
+        {
+            if (!(p is Group group)) return;
+            int group_index = Groups.IndexOf(group);
+            Groups.Remove(group);
+            if (group_index < Groups.Count)
+                SelectedGroup = Groups[group_index];
+        }
+
+        #endregion
+
+        #endregion
         /*********************************************************************************************************************************************/
         public MainWindowViewModel()
         {
@@ -135,6 +174,8 @@ namespace testMVVM.ViewModels
 
             CloseApplicationCommand = new RelatedCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             ChangeSelectedIndexCommand = new RelatedCommand(OnChangeSelectedIndexCommandExecuted, CanChangeSelectedIndexCommandExecute);
+            CreateGroupCommand = new RelatedCommand(OnCreateGroupCommandExecuted, CanCreateGroupCommandExecute);
+            DeleteGroupCommand = new RelatedCommand(OnDeleteGroupCommandExecuted, CanDeleteGroupCommandExecute);
 
             #endregion
 
